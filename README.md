@@ -56,9 +56,6 @@ Open `http://127.0.0.1:8000`. Click a simulator scenario, then inspect drift sig
 | `GET` | `/api/v1/overview` | Dashboard data and most recent incident |
 | `GET` | `/api/v1/incidents` | Audit trail |
 
-## Interview talking points
+## Design notes
 
-1. **Why PSI?** PSI compares binned distributions and is easy to explain, operate, and threshold; it complements model performance checks.
-2. **Why delayed labels?** Production labels are often delayed, so data/prediction drift provides an early warning—not a false claim that model accuracy is already known.
-3. **Why separate severity from retraining?** Drift can be a tracking bug or expected seasonality. AegisML escalates, preserves evidence, and recommends a human decision.
-4. **Production next steps:** streaming ingestion (Kafka), feature store, OpenTelemetry metrics, canary models, model registry, and role-based incident ownership.
+AegisML keeps monitoring decisions explicit: PSI provides an interpretable drift signal, delayed-label metrics are calculated only when outcomes arrive, and severity is separated from retraining recommendations. The current local dashboard is intentionally small; production deployments could add streaming ingestion, a feature store, telemetry, model versioning, and role-based incident ownership.
